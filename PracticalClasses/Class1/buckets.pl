@@ -1,19 +1,32 @@
+/*
+* My Solution to the Bucket-Filling Problem, made famous by the original Die Hard
+* movie
+*
+* It is written in prolog because it is really good to perform searches on trees.
+*/
+
+% Initial and Final States
 initial([0, 0]).
 final([2, _]).
 
+% Init function to kick-off exploration. In the current state, it only finds the
+% first solution it deems appropriate. To find all solutions, we can simply tell
+% the machine to fail, and it will try a different set of operations.
+%
+% To see it in action, remove the . from the final line and uncomment the rest.
 start :-
     initial(E),
     dfs(E, [E], Solution, Ops),
     write('Solution: '), write(Solution), nl,
-    write('Operations: '), write(Ops).
+    write('Operations: '), write(Ops). %, nl, fail.
 
 dfs(E, _, [E], []) :-
     final(E).
+
 dfs(E, Visited, [E | Rest], [Op | RestOps]) :-
     transform(E, NewE, Op),
     \+ member(NewE, Visited),
     dfs(NewE, [NewE | Visited], Rest, RestOps).
-
 
 transform([B1, B2], [NewB1, NewB2], 'FillB1') :-
     B1 < 4,
