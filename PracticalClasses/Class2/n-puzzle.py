@@ -7,9 +7,14 @@ class PuzzleNode:
     def __init__(self, board: list, previousNode=None) -> None:
         self.board = board
         self.previousNode = previousNode
+        self.visited = False
+        self.heuristic = -1
 
     def __eq__(self, other) -> bool:
         return isinstance(other, self.__class__) and self.board == other.board
+
+    def __gt__(self, other) -> bool:
+        return isinstance(other, PuzzleNode) and self.heuristic > other.heuristic
 
     def __repr__(self):
         return f"({self.board})"
@@ -78,9 +83,9 @@ class PuzzleNode:
 
 
 initialBoard = [
-    [1, 2, 3],
-    [4, 5, 0],
-    [7, 8, 6],
+    [1, 6, 2],
+    [5, 7, 3],
+    [0, 4, 8],
 ]
 
 initialNode = PuzzleNode(initialBoard)
@@ -94,4 +99,4 @@ def condition(node: PuzzleNode):
     return False
 
 
-print("Path: ", dfs(initialNode, condition))
+print("Path: ", bfs(initialNode, condition))

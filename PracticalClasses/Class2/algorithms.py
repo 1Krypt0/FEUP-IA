@@ -28,3 +28,19 @@ def dfs(node, condition, visited=[]):
             return nextNode
 
     return None
+
+
+def bfs(node, condition, visited: list = []):
+    queue = []
+    node.visited = True
+    queue.append(node)
+    while queue:
+        currentNode = queue.pop(0)
+
+        if condition(currentNode):
+            return getPath(currentNode)
+
+        for child in currentNode.edgeNodes():
+            if child not in visited:
+                visited.append(child)
+                queue.append(child)
