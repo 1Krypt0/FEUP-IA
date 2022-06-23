@@ -1,3 +1,6 @@
-[submodule "Project"]
+[submodule "proj1"]
 	path = proj1
 	url = git@github.com:1Krypt0/FEUP-IA-PROJ1.git
+[submodule "proj2"]
+	path = proj2
+	url = git@github.com:1Krypt0/FEUP-IA-PROJ2.git
